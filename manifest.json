@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "WeMD · Page to Markdown (WeChat-ready)",
+  "short_name": "WeMD",
+  "version": "0.1.2",
+  "description": "网页/公众号文章一键转干净 Markdown —— 本地转换零外发，实时显示 token 节省估算。One-click page-to-Markdown, fully local, with quantified token savings.",
+  "permissions": ["contextMenus", "activeTab", "scripting", "clipboardWrite", "downloads"],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "WeMD (Alt+Shift+M)"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": { "default": "Alt+Shift+M" },
+      "description": "Open WeMD popup / 打开 WeMD"
+    }
+  },
+  "minimum_chrome_version": "102"
+}

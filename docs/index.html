@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WeMD · Page to Markdown (WeChat-ready)</title>
+<meta name="description" content="One-click page-to-Markdown in your browser — fully local, zero network requests, with quantified token savings. WeChat-ready.">
+<style>
+:root{--fg:#1f2328;--muted:#57606a;--accent:#0969da;--ok:#1a7f37;--border:#d0d7de;--bg:#ffffff;--card:#f6f8fa}
+@media(prefers-color-scheme:dark){:root{--fg:#e6edf3;--muted:#8b949e;--border:#30363d;--bg:#0d1117;--card:#161b22}}
+*{box-sizing:border-box}body{margin:0;font:16px/1.65 system-ui,"Segoe UI","Microsoft YaHei",sans-serif;color:var(--fg);background:var(--bg)}
+.wrap{max-width:880px;margin:0 auto;padding:48px 20px}
+h1{font-size:34px;margin:0 0 8px}
+h2{font-size:24px;margin:40px 0 12px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.tag{color:var(--muted);font-size:18px;margin-bottom:24px}
+.badge{display:inline-block;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2px 12px;font-size:13px;margin:0 6px 8px 0}
+.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;border-radius:8px;padding:12px 24px;margin:12px 8px 0 0}
+.cta.alt{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:16px 0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px}
+.card h3{margin:0 0 8px;font-size:16px}
+.card p{margin:0;font-size:14px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px}
+th,td{border:1px solid var(--border);padding:10px 12px;text-align:left}
+th{background:var(--card)}
+.price{font-size:28px;font-weight:700;color:var(--ok)}
+.note{color:var(--muted);font-size:13px}
+.zhh2{font-size:20px;font-weight:700;margin-top:8px}
+ul{padding-left:22px}
+footer{margin-top:56px;border-top:1px solid var(--border);padding-top:16px;color:var(--muted);font-size:13px}
+footer a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>WeMD</h1>
+  <div class="tag">Page to Markdown (WeChat-ready) — one click, fully local, with quantified token savings.</div>
+  <div class="zhh2">网页 / 公众号文章一键转干净 Markdown —— 本地转换零外发，实时显示 token 节省估算。</div>
+  <div>
+    <span class="badge">🔒 Zero network requests</span>
+    <span class="badge">🇨🇳 WeChat-ready 微信特化</span>
+    <span class="badge">📊 Token savings quantified</span>
+    <span class="badge">⚡ MV3 · No account</span>
+  </div>
+  <a class="cta" href="https://chromewebstore.google.com/">Install from Chrome Web Store（上架后生效）</a>
+  <a class="cta alt" href="https://github.com/stwhwing/wemd-extension">Source on GitHub</a>
+
+  <h2>What it does · 它做什么</h2>
+  <div class="grid">
+    <div class="card"><h3>📄 Page → Markdown</h3><p>One click converts the page you're on into clean, LLM-ready Markdown — headings, links, code blocks and simple tables preserved.<br><br>一键把当前网页转为干净 Markdown：标题、链接、代码块、表格完整保留。</p></div>
+    <div class="card"><h3>🇨🇳 WeChat-ready</h3><p>Deep extraction for WeChat official-account articles: real title, account name, publish time and the #js_content body — with lazy-loaded <code>data-src</code> images repaired.<br><br>微信公众号文章深度抽取：标题/公众号/时间/正文 + 懒加载图片修复。通用转 MD 工具对微信效果差，WeMD 专化处理。</p></div>
+    <div class="card"><h3>📊 Token savings, quantified</h3><p>See exactly how many tokens the conversion saves before you paste into an AI chat — measured with the chars/4 heuristic and labeled as such. Real measurement: a WeChat page ≈ <b>1.1M → 905 tokens</b>.<br><br>粘贴给 AI 前，先看到"这次转换省了多少 token"。实测：某微信页 ≈ 111 万 → 905 tokens。</p></div>
+    <div class="card"><h3>🔒 Fully local</h3><p>Zero network requests from the extension. No account, no telemetry, no cloud. Conversion happens in your browser and dies with the popup unless you save it.<br><br>扩展自身零网络请求：无账号、无遥测、无云端。转换在浏览器内完成，弹窗关闭即消失，除非您主动保存。</p></div>
+  </div>
+
+  <h2>Pricing · 定价</h2>
+  <table>
+    <tr><th></th><th>Free / 免费版</th><th>Pro</th></tr>
+    <tr><td>Single page &amp; selection → Markdown 单页/选区转换</td><td>✅</td><td>✅</td></tr>
+    <tr><td>Copy / download .md 复制/下载</td><td>✅</td><td>✅</td></tr>
+    <tr><td>Token savings panel token 节省面板</td><td>✅</td><td>✅</td></tr>
+    <tr><td>WeChat deep extraction 微信特化抽取</td><td>✅</td><td>✅</td></tr>
+    <tr><td>Batch convert all tabs 批量转换所有标签页</td><td>—</td><td>✅</td></tr>
+    <tr><td>Custom front-matter templates 自定义模板</td><td>—</td><td>✅</td></tr>
+    <tr><td>Image bundle download 图片打包下载</td><td>—</td><td>✅</td></tr>
+    <tr><td>Smart WeChat promo-tail truncation 往期精选智能截断</td><td>—</td><td>✅</td></tr>
+    <tr><td><b>Price</b></td><td><span class="price">$0</span></td><td><span class="price">$29<span style="font-size:14px;font-weight:400">/year</span></span> or $59 lifetime</td></tr>
+  </table>
+  <p class="note">Pro is coming after the free launch period — early users keep lifetime access pricing. Pro 将在免费发布期结束后推出，早期用户锁定买断价。</p>
+
+  <h2>Privacy · 隐私</h2>
+  <p><b>WeMD does not collect, transmit, store, or share any of your data. Anywhere. By anyone.</b> The only permissions are <code>activeTab</code>/<code>scripting</code> (convert the page you act on), <code>contextMenus</code>, <code>clipboardWrite</code> and <code>downloads</code> — used only when you click.<br><br><b>WeMD 不收集、不传输、不存储、不共享您的任何数据。</b>权限仅用于您主动触发的转换、复制与下载。</p>
+  <p>Full policy: <a href="privacy.html">Privacy Policy / 隐私政策</a> · Terms: <a href="terms.html">Terms of Service / 服务条款</a></p>
+
+  <h2>Also from this author · 作者其他项目</h2>
+  <p>Agent-side sibling: <a href="https://github.com/stwhwing/markitdown-skill">markitdown-skill</a> — the same "clean Markdown + honest token math" philosophy as a CLI skill for AI agents (PDF/Word/PPT/Excel → Markdown). Browser user? Use WeMD. Agent user? Use the skill.<br><br>同一个「干净 Markdown + 诚实 token 数学」理念的 CLI 技能版（AI Agent 用）：浏览器用户用 WeMD，Agent 用户用 skill。</p>
+
+  <footer>
+    © 2026 stwhwing · <a href="terms.html">Terms of Service</a> · <a href="privacy.html">Privacy Policy</a> · <a href="https://github.com/stwhwing/wemd-extension/issues">Issues / Feedback 反馈</a>
+  </footer>
+</div>
+</body>
+</html>

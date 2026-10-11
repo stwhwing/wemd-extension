@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header>
+    <h1>WeMD <span class="ver">v<span id="ver"></span></span></h1>
+    <div id="title" class="title"></div>
+    <div id="url" class="url"></div>
+  </header>
+
+  <div id="status" class="status">转换中… / converting…</div>
+
+  <div id="stats" class="stats hidden">
+    <div class="stat-row">
+      <span>原文 ≈ <b id="raw-tok"></b> tok</span>
+      <span>Markdown ≈ <b id="md-tok"></b> tok</span>
+    </div>
+    <div class="saved">节省 ≈ <b id="saved-tok"></b> tok（<span id="saved-pct"></span>%）</div>
+    <div class="basis" id="basis"></div>
+    <div class="est">估算口径 chars/4，CJK 偏差较大 / chars-4 heuristic, CJK-biased</div>
+  </div>
+
+  <label class="sel-only"><input type="checkbox" id="sel-only" /> 仅转换选中内容 / selection only</label>
+
+  <pre id="preview" class="preview hidden"></pre>
+
+  <div class="btns">
+    <button id="copy" class="hidden">复制 Markdown / Copy</button>
+    <button id="download" class="hidden">下载 .md / Download</button>
+    <button id="reconvert" class="hidden">重新转换 / Re-convert</button>
+  </div>
+
+  <footer>🔒 全程本地转换，本扩展不发出任何网络请求 / 100% local, zero network requests</footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
