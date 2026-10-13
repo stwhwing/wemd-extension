@@ -94,19 +94,24 @@
       replacement: function (content, node) {
         var code = node.querySelector("code");
         var lang = "";
-        // language-xxx / lang-xxx class, data-lang attr, or mermaid container
-        var cls = (code.getAttribute("class") || "") + " " + (node.getAttribute("class") || "");
-        var m = cls.match(/(?:language|lang|highlight)-([a-z0-9+#]+)/i);
-        if (m) {
-          lang = m[1].toLowerCase();
-        } else if (code.getAttribute("data-lang") || node.getAttribute("data-lang")) {
-          lang = (code.getAttribute("data-lang") || node.getAttribute("data-lang")).toLowerCase();
-        } else if (/\bmermaid\b/i.test(cls)) {
-          lang = "mermaid";
+        // Priority: our data-wemd-lang (set pre-Readability) > class patterns
+        // > data-lang attrs > mermaid container heuristic.
+        var sources = [
+          code && code.getAttribute("data-wemd-lang"),
+          node.getAttribute && node.getAttribute("data-wemd-lang"),
+          (code && code.getAttribute("class")) + " " + (node.getAttribute("class") || ""),
+          (code && code.getAttribute("data-lang")) || node.getAttribute && node.getAttribute("data-lang")
+        ];
+        for (var i = 0; i < sources.length && !lang; i++) {
+          var src = sources[i];
+          if (!src) continue;
+          var m = String(src).match(/(?:language|lang|highlight)-([a-z0-9+#]+)/i);
+          if (m) lang = m[1].toLowerCase();
+          else if (i < 2 && src.length < 20 && /^[a-z0-9+#]+$/.test(src)) lang = src; // data-wemd-lang plain value
+          else if (/\bmermaid\b/i.test(src)) lang = "mermaid";
         }
         var text = (code.textContent || "").replace(/\n$/, "");
         var fence = "```";
-        // longer fence if the code itself contains backticks
         while (text.indexOf(fence) !== -1) fence += "`";
         return "\n\n" + fence + lang + "\n" + text + "\n" + fence + "\n\n";
       },
@@ -189,8 +194,16 @@
         // elements by class; Readability cannot see that on a detached clone).
         clone.querySelectorAll("noscript").forEach(function (n) { n.remove(); });
         pruneHidden(document.body, clone.body || clone.querySelector("body") || clone);
-        // keepClasses: preserve code language-* / lang-* classes so the fenced
-        // rule can emit ```python etc. (Readability strips classes by default).
+        // Preserve code language into a data attribute BEFORE Readability:
+        // it strips classes (even with keepClasses in some paths) but keeps
+        // data-* attributes. The fenced rule reads data-wemd-lang later.
+        clone.querySelectorAll("pre code[class], pre[class], code[class]").forEach(function (c) {
+          if (c.getAttribute("data-wemd-lang")) return;
+          var cls = c.getAttribute("class") || "";
+          var m = cls.match(/(?:language|lang|highlight)-([a-z0-9+#]+)/i);
+          if (!m && /\bmermaid\b/i.test(cls)) m = [null, "mermaid"];
+          if (m) c.setAttribute("data-wemd-lang", m[1].toLowerCase());
+        });
         var parsed = new Readability(clone, { keepClasses: true }).parse();
         if (!parsed || !parsed.content) {
           return { ok: false, error: "Readability 无法提取正文 / no readable content" };
