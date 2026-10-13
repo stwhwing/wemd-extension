@@ -120,7 +120,8 @@
       bulletListMarker: "-",
       emDelimiter: "*",
     });
-    td.remove(["script", "style", "noscript", "form", "svg", "button"]);
+    td.remove(["script", "style", "noscript", "form", "svg", "button",
+      ".sp-wrapper", ".sp-stack", ".sp-code-editor", "[class*='sandpack']"]);
     addTableRule(td);
     addCodeBlockRule(td);
     return td;
@@ -188,7 +189,9 @@
         // elements by class; Readability cannot see that on a detached clone).
         clone.querySelectorAll("noscript").forEach(function (n) { n.remove(); });
         pruneHidden(document.body, clone.body || clone.querySelector("body") || clone);
-        var parsed = new Readability(clone).parse();
+        // keepClasses: preserve code language-* / lang-* classes so the fenced
+        // rule can emit ```python etc. (Readability strips classes by default).
+        var parsed = new Readability(clone, { keepClasses: true }).parse();
         if (!parsed || !parsed.content) {
           return { ok: false, error: "Readability 无法提取正文 / no readable content" };
         }
@@ -201,6 +204,9 @@
       var mdTok = tok(md.length);
       var saved = rawTok - mdTok;
       var pct = rawTok > 0 ? Math.round((saved / rawTok) * 100) : 0;
+      // Feed/app-page heuristic: huge page, tiny extraction -> warn the user
+      // instead of silently returning a near-empty result.
+      var feedLike = md.length < 200 && rawHtml.length > 500000;
 
       return {
         ok: true,
@@ -209,6 +215,7 @@
         url: location.href,
         basis: basis,
         meta: meta,
+        feedLike: feedLike,
         stats: {
           rawTok: rawTok,
           mdTok: mdTok,

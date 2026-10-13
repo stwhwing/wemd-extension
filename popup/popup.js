@@ -25,17 +25,30 @@ function render(res) {
   $("saved-pct").textContent = res.stats.savedPct;
   $("basis").textContent = "口径 / basis: " + res.basis;
   $("preview").textContent = res.md;
-  ["stats", "preview", "copy", "download", "reconvert", "airow"].forEach(function (id) {
+  ["stats", "preview", "copy", "download", "reconvert", "airow", "airow2"].forEach(function (id) {
     $(id).classList.remove("hidden");
   });
+  // Honest hint for app/feed pages: tiny output from a huge page means
+  // there was no article to extract (dashboards, feeds, logged-in shells).
+  if (res.feedLike) {
+    showStatus("⚠️ 此页面为信息流/应用页，未检测到正文——建议打开具体文章/文档后再转换。 "
+      + "This looks like a feed/app page with no article body - open a specific article instead.", false);
+    $("status").classList.remove("hidden");
+  }
 }
 
 // --- Send to AI ------------------------------------------------------------
+// CN set: direct connectivity. Global set: requires proxy in CN (marked 🌐).
+// None of the CN tools support ?q= prefill -> always copy + open + toast.
 var AI_TARGETS = {
-  "ai-chatgpt":    { name: "ChatGPT",    prefill: "https://chatgpt.com/?q=" },
-  "ai-claude":     { name: "Claude",     prefill: "https://claude.ai/new?q=" },
-  "ai-perplexity": { name: "Perplexity", prefill: "https://www.perplexity.ai/search?q=" },
-  "ai-gemini":     { name: "Gemini",     prefill: null } // no ?q= prefill support
+  "ai-deepseek":    { name: "DeepSeek",    base: "https://chat.deepseek.com/" },
+  "ai-kimi":        { name: "Kimi",        base: "https://kimi.moonshot.cn/" },
+  "ai-doubao":      { name: "豆包",         base: "https://www.doubao.com/chat/" },
+  "ai-yuanbao":     { name: "元宝",         base: "https://yuanbao.tencent.com/chat/" },
+  "ai-chatgpt":     { name: "ChatGPT",     base: "https://chatgpt.com/",    prefill: "https://chatgpt.com/?q=" },
+  "ai-claude":      { name: "Claude",      base: "https://claude.ai/new",   prefill: "https://claude.ai/new?q=" },
+  "ai-perplexity":  { name: "Perplexity",  base: "https://www.perplexity.ai/", prefill: "https://www.perplexity.ai/search?q=" },
+  "ai-gemini":      { name: "Gemini",      base: "https://gemini.google.com/app", prefill: null }
 };
 var PREFILL_LIMIT = 6000; // chars; above this, copy + manual paste
 
@@ -56,10 +69,9 @@ function sendToAI(id) {
   var target = AI_TARGETS[id];
   if (!target) return;
   var prompt = buildPrompt(LAST);
-  var url = target.prefill && prompt.length <= PREFILL_LIMIT
+  var url = (target.prefill && prompt.length <= PREFILL_LIMIT)
     ? target.prefill + encodeURIComponent(prompt)
-    : target.prefill || { "ai-chatgpt": "https://chatgpt.com/", "ai-claude": "https://claude.ai/new",
-                          "ai-perplexity": "https://www.perplexity.ai/", "ai-gemini": "https://gemini.google.com/app" }[id];
+    : target.base;
   var copyThen = function () {
     return navigator.clipboard.writeText(prompt).then(function () {
       showToast("已复制全文（" + LAST.stats.mdTok.toLocaleString() + " tok）→ 在新标签页 Ctrl+V 粘贴");
@@ -75,7 +87,8 @@ function sendToAI(id) {
   }
 }
 
-["ai-chatgpt", "ai-claude", "ai-gemini", "ai-perplexity"].forEach(function (id) {
+["ai-deepseek", "ai-kimi", "ai-doubao", "ai-yuanbao",
+ "ai-chatgpt", "ai-claude", "ai-gemini", "ai-perplexity"].forEach(function (id) {
   $(id).addEventListener("click", function () { sendToAI(id); });
 });
 
