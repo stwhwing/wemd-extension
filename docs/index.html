@@ -34,8 +34,8 @@ footer a{color:var(--accent)}
 <body>
 <div class="wrap">
   <h1>WeMD</h1>
-  <div class="tag">Page to Markdown (WeChat-ready) — one click, fully local, with quantified token savings.</div>
-  <div class="zhh2">网页 / 公众号文章一键转干净 Markdown —— 本地转换零外发，实时显示 token 节省估算。</div>
+  <div class="tag">Convert what <s>Jina</s> the server can't see. 把服务端抓不到的页面，变成 AI 能读的 Markdown。</div>
+  <div class="zhh2">网页/公众号文章一键转干净 Markdown —— 本地转换零外发，实时显示 token 节省估算。</div>
   <div>
     <span class="badge">🔒 Zero network requests</span>
     <span class="badge">🇨🇳 WeChat-ready 微信特化</span>
@@ -44,6 +44,17 @@ footer a{color:var(--accent)}
   </div>
   <a class="cta" href="https://chromewebstore.google.com/">Install from Chrome Web Store（上架后生效）</a>
   <a class="cta alt" href="https://github.com/stwhwing/wemd-extension">Source on GitHub</a>
+
+  <h2>Why local beats server-side / 为什么本地转换赢服务端</h2>
+  <table>
+    <tr><th>Page type / 页面类型</th><th>Jina Reader &amp; server-side fetchers</th><th>WeMD (runs in your browser)</th></tr>
+    <tr><td>Logged-in dashboards &amp; docs 登录后文档</td><td>❌ no session, returns stub</td><td>✅ uses your live session</td></tr>
+    <tr><td>Paywalled articles (your subscription) 付费墙文章</td><td>❌ blocked / paywall</td><td>✅ already rendered for you</td></tr>
+    <tr><td>SPAs / infinite scroll 单页应用</td><td>❌ empty JS shell</td><td>✅ live DOM after render</td></tr>
+    <tr><td>Personalized / internal pages 个性化/内页</td><td>❌ generic version</td><td>✅ exactly what you see</td></tr>
+    <tr><td>WeChat articles (3MB shell) 微信公众号</td><td>❌ chrome buries the body</td><td>✅ deep extraction, <b>-100% tokens measured</b></td></tr>
+  </table>
+  <p class="note"><b>Measured on real pages / 真实页面实测</b>：python.org <b>13,245 → 746 tokens (-95%)</b> · a WeChat article <b>1,117,393 → 905 tokens (-100%)</b>. Token counting (chars/4 heuristic) is shown before you paste — <b>free, always</b>.</p>
 
   <h2>What it does · 它做什么</h2>
   <div class="grid">

@@ -25,10 +25,59 @@ function render(res) {
   $("saved-pct").textContent = res.stats.savedPct;
   $("basis").textContent = "口径 / basis: " + res.basis;
   $("preview").textContent = res.md;
-  ["stats", "preview", "copy", "download", "reconvert"].forEach(function (id) {
+  ["stats", "preview", "copy", "download", "reconvert", "airow"].forEach(function (id) {
     $(id).classList.remove("hidden");
   });
 }
+
+// --- Send to AI ------------------------------------------------------------
+var AI_TARGETS = {
+  "ai-chatgpt":    { name: "ChatGPT",    prefill: "https://chatgpt.com/?q=" },
+  "ai-claude":     { name: "Claude",     prefill: "https://claude.ai/new?q=" },
+  "ai-perplexity": { name: "Perplexity", prefill: "https://www.perplexity.ai/search?q=" },
+  "ai-gemini":     { name: "Gemini",     prefill: null } // no ?q= prefill support
+};
+var PREFILL_LIMIT = 6000; // chars; above this, copy + manual paste
+
+function buildPrompt(res) {
+  return "Use the webpage context below as source material. Answer my questions using only this context unless I ask otherwise.\n\n"
+    + "# " + (res.title || "Webpage") + "\n" + res.md;
+}
+
+function showToast(msg) {
+  var t = $("toast");
+  t.textContent = msg;
+  t.classList.remove("hidden");
+  setTimeout(function () { t.classList.add("hidden"); }, 6000);
+}
+
+function sendToAI(id) {
+  if (!LAST || !LAST.md) return;
+  var target = AI_TARGETS[id];
+  if (!target) return;
+  var prompt = buildPrompt(LAST);
+  var url = target.prefill && prompt.length <= PREFILL_LIMIT
+    ? target.prefill + encodeURIComponent(prompt)
+    : target.prefill || { "ai-chatgpt": "https://chatgpt.com/", "ai-claude": "https://claude.ai/new",
+                          "ai-perplexity": "https://www.perplexity.ai/", "ai-gemini": "https://gemini.google.com/app" }[id];
+  var copyThen = function () {
+    return navigator.clipboard.writeText(prompt).then(function () {
+      showToast("已复制全文（" + LAST.stats.mdTok.toLocaleString() + " tok）→ 在新标签页 Ctrl+V 粘贴");
+    }).catch(function () {
+      showToast("剪贴板写入失败，请手动从预览框复制");
+    });
+  };
+  if (target.prefill && prompt.length <= PREFILL_LIMIT) {
+    chrome.tabs.create({ url: url });
+    showToast(target.name + " 已打开（内容已预填，如未登录会先要求登录）");
+  } else {
+    copyThen().then(function () { chrome.tabs.create({ url: url }); });
+  }
+}
+
+["ai-chatgpt", "ai-claude", "ai-gemini", "ai-perplexity"].forEach(function (id) {
+  $(id).addEventListener("click", function () { sendToAI(id); });
+});
 
 function showError(msg) {
   showStatus(friendlyError(msg) || "转换失败 / conversion failed", true);

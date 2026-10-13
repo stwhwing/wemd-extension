@@ -83,6 +83,36 @@
     });
   }
 
+  // --- Code block language preservation ----------------------------------
+  // Turndown's default fenced rule drops the language tag. Tech readers paste
+  // into LLMs where language hints matter (and Mermaid diagrams need the tag).
+  function addCodeBlockRule(td) {
+    td.addRule("fencedCodeWithLang", {
+      filter: function (node) {
+        return node.nodeName === "PRE" && node.querySelector("code");
+      },
+      replacement: function (content, node) {
+        var code = node.querySelector("code");
+        var lang = "";
+        // language-xxx / lang-xxx class, data-lang attr, or mermaid container
+        var cls = (code.getAttribute("class") || "") + " " + (node.getAttribute("class") || "");
+        var m = cls.match(/(?:language|lang|highlight)-([a-z0-9+#]+)/i);
+        if (m) {
+          lang = m[1].toLowerCase();
+        } else if (code.getAttribute("data-lang") || node.getAttribute("data-lang")) {
+          lang = (code.getAttribute("data-lang") || node.getAttribute("data-lang")).toLowerCase();
+        } else if (/\bmermaid\b/i.test(cls)) {
+          lang = "mermaid";
+        }
+        var text = (code.textContent || "").replace(/\n$/, "");
+        var fence = "```";
+        // longer fence if the code itself contains backticks
+        while (text.indexOf(fence) !== -1) fence += "`";
+        return "\n\n" + fence + lang + "\n" + text + "\n" + fence + "\n\n";
+      },
+    });
+  }
+
   function makeTurndown() {
     var td = new TurndownService({
       headingStyle: "atx",
@@ -92,6 +122,7 @@
     });
     td.remove(["script", "style", "noscript", "form", "svg", "button"]);
     addTableRule(td);
+    addCodeBlockRule(td);
     return td;
   }
 
