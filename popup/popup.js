@@ -185,23 +185,40 @@ function setBatchStatus(text) {
   el.classList.remove("hidden");
 }
 
+// Inject extractor into a tab and run it (same mechanism as single-page convert).
+function injectAndExtract(tabId) {
+  return new Promise((resolve) => {
+    chrome.scripting.executeScript(
+      { target: { tabId: tabId }, files: ["content/libs/readability.js", "content/libs/turndown.js", "content/extractor.js"] },
+      function () {
+        if (chrome.runtime.lastError) return resolve(null);
+        chrome.scripting.executeScript(
+          { target: { tabId: tabId }, func: function () { return window.__wemdExtract({ selectionOnly: false }); } },
+          function (results) {
+            if (chrome.runtime.lastError) return resolve(null);
+            resolve((results && results[0] && results[0].result) || null);
+          }
+        );
+      }
+    );
+  });
+}
+
 $("batch").addEventListener("click", async function () {
   const pro = await getPro();
   if (!pro) return;
   $("batch").disabled = true;
   try {
-    // No url filter: the "tabs" permission would be required to match on
-    // tab.url. Non-web pages simply fail sendMessage and are skipped below.
     const tabs = await chrome.tabs.query({ currentWindow: true });
+    const targets = tabs.filter(function (t) {
+      return t.id && t.id > 0 && /^https?:/i.test(t.url || "");
+    });
     let done = 0;
     const parts = [];
-    for (const tab of tabs) {
-      if (!tab.id || tab.id < 0 || /^chrome|^edge|^about:/.test(tab.url || "")) continue;
-      setBatchStatus(t("batch_converting")(++done, tabs.length, (tab.title || "").slice(0, 30)));
-      try {
-        const resp = await chrome.tabs.sendMessage(tab.id, { type: "extract" });
-        if (resp && resp.ok && resp.md) parts.push("# " + (resp.title || tab.title || "Untitled") + "\n\nSource: " + (tab.url || "") + "\n\n" + resp.md);
-      } catch (e) { /* content script not injected - skip */ }
+    for (const tab of targets) {
+      setBatchStatus(t("batch_converting")(++done, targets.length, (tab.title || "").slice(0, 40)));
+      const res = await injectAndExtract(tab.id);
+      if (res && res.ok && res.md) parts.push("# " + (res.title || tab.title || "Untitled") + "\n\nSource: " + (tab.url || "") + "\n\n" + res.md);
     }
     if (!parts.length) { setBatchStatus(t("batch_none")); return; }
     const merged = parts.join("\n\n---\n\n");
