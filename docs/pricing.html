@@ -8,39 +8,42 @@
 :root{--fg:#1f2328;--muted:#57606a;--accent:#0969da;--ok:#1a7f37;--border:#d0d7de;--bg:#ffffff;--card:#f6f8fa}
 @media(prefers-color-scheme:dark){:root{--fg:#e6edf3;--muted:#8b949e;--border:#30363d;--bg:#0d1117;--card:#161b22}}
 *{box-sizing:border-box}body{margin:0;font:16px/1.7 system-ui,"Segoe UI","Microsoft YaHei",sans-serif;color:var(--fg);background:var(--bg)}
-.wrap{max-width:880px;margin:0 auto;padding:48px 20px}
+.wrap{max-width:1000px;margin:0 auto;padding:48px 20px}
 h1{font-size:28px;margin:0 0 4px}
 .sub{color:var(--muted);margin-bottom:24px}
 table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px}
-th,td{border:1px solid var(--border);padding:10px 12px;text-align:left}
+th,td{border:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}
 th{background:var(--card)}
 .price{font-size:26px;font-weight:700;color:var(--ok)}
 .note{color:var(--muted);font-size:13px;margin:12px 0}
 footer{margin-top:48px;border-top:1px solid var(--border);padding-top:16px;color:var(--muted);font-size:13px}
 a{color:var(--accent)}
+.popular{display:inline-block;background:var(--ok);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:6px;vertical-align:middle}
+.save{color:var(--ok);font-weight:600}
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>WeMD Pricing</h1>
-  <div class="sub">Free forever for core conversion · Pro for power users · 所有价格 USD</div>
+  <div class="sub">Free forever for core conversion · Pro for power users · 所有价格 USD · 14 天无理由退款</div>
 
   <table>
-    <tr><th></th><th>Free / 免费版</th><th>WeMD Pro (Annual)</th><th>WeMD Pro (Lifetime)</th></tr>
-    <tr><td>Single page &amp; selection → Markdown 单页/选区转换</td><td>✅</td><td>✅</td><td>✅</td></tr>
-    <tr><td>Copy / download .md 复制/下载</td><td>✅</td><td>✅</td><td>✅</td></tr>
-    <tr><td>Token savings panel token 节省面板</td><td>✅</td><td>✅</td><td>✅</td></tr>
-    <tr><td>WeChat deep extraction 微信特化抽取</td><td>✅</td><td>✅</td><td>✅</td></tr>
-    <tr><td>Batch convert all tabs 批量转换所有标签页</td><td>—</td><td>✅</td><td>✅</td></tr>
-    <tr><td>Custom front-matter templates 自定义模板</td><td>—</td><td>✅</td><td>✅</td></tr>
-    <tr><td>Image bundle download 图片打包下载</td><td>—</td><td>✅</td><td>✅</td></tr>
-    <tr><td>Smart WeChat promo-tail truncation 推广尾智能截断</td><td>—</td><td>✅</td><td>✅</td></tr>
-    <tr><td><b>Price</b></td><td><span class="price">$0</span></td><td><span class="price">$29</span><br><span class="note">per year, billed annually</span></td><td><span class="price">$59</span><br><span class="note">one-time, lifetime license</span></td></tr>
+    <tr><th></th><th>Free / 免费版</th><th>WeMD Pro (Monthly)</th><th>WeMD Pro (Annual)<span class="popular">最受欢迎 Most popular</span></th><th>WeMD Pro (Lifetime)</th></tr>
+    <tr><td>Single page &amp; selection → Markdown 单页/选区转换</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+    <tr><td>Copy / download .md 复制/下载</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+    <tr><td>Token savings panel token 节省面板</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+    <tr><td>WeChat deep extraction 微信特化抽取</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+    <tr><td>Send to AI — 8 assistants 一键发 AI</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+    <tr><td>Batch convert all tabs 批量转换所有标签页</td><td>—</td><td>✅</td><td>✅</td><td>✅</td></tr>
+    <tr><td>Custom front-matter templates 自定义模板</td><td>—</td><td>✅</td><td>✅</td><td>✅</td></tr>
+    <tr><td>Image bundle download 图片打包下载</td><td>—</td><td>✅</td><td>✅</td><td>✅</td></tr>
+    <tr><td>Smart WeChat promo-tail truncation 推广尾智能截断</td><td>—</td><td>✅</td><td>✅</td><td>✅</td></tr>
+    <tr><td><b>Price</b></td><td><span class="price">$0</span></td><td><span class="price">$3.99</span><br><span class="note">per month, cancel anytime</span></td><td><span class="price">$29</span><br><span class="note">per year · <span class="save">省 39% vs monthly (save 39%)</span></span></td><td><span class="price">$59</span><br><span class="note">one-time · <span class="save">≈2 年回本 (pays for itself in 2 years)</span></span></td></tr>
   </table>
 
-  <p class="note">WeMD Pro is coming after the free launch period on the Chrome Web Store — early users lock in the lifetime price. Prices are charged in USD through our payment provider (Paddle). All paid plans include the 14-day money-back guarantee — see the <a href="refund.html">Refund Policy</a>.<br><br>WeMD Pro 将在 Chrome Web Store 免费发布期结束后推出，早期用户锁定终身买断价。价格以美元通过支付服务商（Paddle）收取；所有付费计划均含 14 天无理由退款——见<a href="refund.html">退款政策</a>。</p>
+  <p class="note">Prices are charged in USD through our payment provider (Paddle), who acts as Merchant of Record — global tax compliance included. All paid plans include the 14-day money-back guarantee — see the <a href="refund.html">Refund Policy</a>. The free tier stays free forever: single-page &amp; selection conversion, token savings panel, and Send-to-AI are all included at no cost.<br><br>价格以美元通过支付服务商（Paddle，作为记录 Merchant）收取，含全球税务合规。所有付费计划均含 14 天无理由退款——见<a href="refund.html">退款政策</a>。免费版永久免费：单页/选区转换、token 节省面板与 Send-to-AI 全部包含。</p>
 
-  <p class="note"><b>No subscription fatigue.</b> One payment, yours forever — no renewals to cancel, no price hikes. The free tier stays free forever: single-page &amp; selection conversion, token savings panel, and Send-to-AI are all included at no cost.<br><br><b>拒绝订阅疲劳。</b>一次买断，永久拥有——无需续费、不涨价。免费版永久免费：单页/选区转换、token 节省面板与 Send-to-AI 全部包含。</p>
+  <p class="note"><b>No subscription fatigue.</b> The Lifetime plan is a one-time payment — yours forever, no renewals to cancel, no price hikes. Annual users pay once a year. Monthly users can cancel anytime.<br><br><b>拒绝订阅疲劳。</b>终身版一次买断，永久拥有——无需续费、不涨价。年付每年一次；月付随时可取消。</p>
 
   <footer>© 2026 stwhwing · <a href="index.html">Home / 首页</a> · <a href="terms.html">Terms of Service</a> · <a href="privacy.html">Privacy Policy</a> · <a href="refund.html">Refund Policy</a> · Contact: wing@zyx.pink</footer>
 </div>
