@@ -78,6 +78,13 @@ function applyLang() {
   });
   $("ailabel-cn").textContent = t("ai_label_cn");
   $("ailabel-gl").textContent = t("ai_label_gl");
+  // Proxy badges are only meaningful to CN users; EN UI stays clean.
+  var GL = { "ai-chatgpt": "ChatGPT", "ai-claude": "Claude", "ai-gemini": "Gemini", "ai-perplexity": "Perplexity" };
+  Object.keys(GL).forEach(function (id) {
+    var b = $(id);
+    b.textContent = GL[id] + (LANG === "zh" ? " 🌐" : "");
+    b.title = LANG === "zh" ? "国内使用需代理 / proxy required in CN" : "";
+  });
   // Group order follows language habit: EN users see global AI first.
   var cnRow = $("airow"), glRow = $("airow2"), parent = glRow.parentNode;
   if (LANG === "en") { parent.insertBefore(glRow, cnRow); }
@@ -183,14 +190,17 @@ $("batch").addEventListener("click", async function () {
   if (!pro) return;
   $("batch").disabled = true;
   try {
-    const tabs = await chrome.tabs.query({ currentWindow: true, url: ["http://*/*", "https://*/*"] });
+    // No url filter: the "tabs" permission would be required to match on
+    // tab.url. Non-web pages simply fail sendMessage and are skipped below.
+    const tabs = await chrome.tabs.query({ currentWindow: true });
     let done = 0;
     const parts = [];
     for (const tab of tabs) {
+      if (!tab.id || tab.id < 0 || /^chrome|^edge|^about:/.test(tab.url || "")) continue;
       setBatchStatus(t("batch_converting")(++done, tabs.length, (tab.title || "").slice(0, 30)));
       try {
         const resp = await chrome.tabs.sendMessage(tab.id, { type: "extract" });
-        if (resp && resp.ok && resp.md) parts.push("# " + (resp.title || tab.title || "Untitled") + "\n\nSource: " + tab.url + "\n\n" + resp.md);
+        if (resp && resp.ok && resp.md) parts.push("# " + (resp.title || tab.title || "Untitled") + "\n\nSource: " + (tab.url || "") + "\n\n" + resp.md);
       } catch (e) { /* content script not injected - skip */ }
     }
     if (!parts.length) { setBatchStatus(t("batch_none")); return; }
