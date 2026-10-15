@@ -27,11 +27,25 @@
 
   <pre id="preview" class="preview hidden"></pre>
 
+  <div id="probar" class="probar hidden">
+    <span id="probadge" class="probadge hidden">PRO</span>
+    <span id="protext" class="protext">Pro 未激活 — 批量转换等功能需激活</span>
+    <button id="probtn" class="probtn hidden">激活 Pro</button>
+  </div>
+  <div id="proform" class="proform hidden">
+    <input id="prokey" class="proinput" placeholder="License key（WEMD-XXXXX-…）">
+    <input id="proemail" class="proinput" placeholder="购买邮箱 / Purchase email">
+    <div class="btns"><button id="prosubmit" class="btns-b">激活 / Activate</button><button id="procancel" class="btns-b ghost">取消</button></div>
+    <div id="promsg" class="promsg hidden"></div>
+  </div>
+
   <div class="btns">
     <button id="copy" class="hidden">复制 Markdown / Copy</button>
     <button id="download" class="hidden">下载 .md / Download</button>
     <button id="reconvert" class="hidden">重新转换 / Re-convert</button>
+    <button id="batch" class="hidden" title="Pro 功能：转换所有标签页并合并导出">批量转换所有标签页 / Batch (Pro)</button>
   </div>
+  <div id="batchstatus" class="promsg hidden"></div>
 
   <div id="airow" class="airow hidden">
     <span class="ailabel">国内（直连） / CN (direct):</span>

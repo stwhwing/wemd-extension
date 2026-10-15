@@ -37,7 +37,104 @@ function render(res) {
   }
 }
 
-// --- Send to AI ------------------------------------------------------------
+// --- Pro license ------------------------------------------------------------
+const LICENSE_API = "https://zyx.pink/wemd-api";
+
+async function getPro() {
+  const s = await chrome.storage.local.get("proLicense");
+  return s.proLicense || null;
+}
+
+async function renderProBar() {
+  const pro = await getPro();
+  const bar = $("probar"), badge = $("probadge"), text = $("protext"), btn = $("probtn"), form = $("proform");
+  bar.classList.remove("hidden");
+  if (pro) {
+    badge.classList.remove("hidden");
+    text.textContent = `Pro 已激活 · ${pro.plan.toUpperCase()} · ${pro.email}`;
+    btn.classList.add("hidden");
+    form.classList.add("hidden");
+    $("batch").classList.remove("hidden");
+  } else {
+    badge.classList.add("hidden");
+    text.textContent = "Pro 未激活 — 批量转换等功能需激活";
+    btn.classList.remove("hidden");
+    $("batch").classList.add("hidden");
+  }
+}
+
+$("probtn").addEventListener("click", () => {
+  $("proform").classList.toggle("hidden");
+  $("promsg").classList.add("hidden");
+});
+$("procancel").addEventListener("click", () => $("proform").classList.add("hidden"));
+
+$("prosubmit").addEventListener("click", async () => {
+  const msg = $("promsg");
+  msg.classList.remove("hidden", "err");
+  msg.textContent = "验证中… / verifying…";
+  try {
+    const r = await fetch(`${LICENSE_API}/license/activate`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ license_key: $("prokey").value.trim(), email: $("proemail").value.trim() }),
+    });
+    const j = await r.json();
+    if (j.ok) {
+      await chrome.storage.local.set({ proLicense: { key: j.license_key, email: $("proemail").value.trim(), plan: j.plan, activatedAt: Date.now() } });
+      msg.textContent = "✅ Pro 已激活！/ Pro activated!";
+      setTimeout(async () => { $("proform").classList.add("hidden"); await renderProBar(); }, 800);
+    } else {
+      msg.classList.add("err");
+      msg.textContent = `❌ ${j.error || "激活失败 / activation failed"}`;
+    }
+  } catch (e) {
+    msg.classList.add("err");
+    msg.textContent = "❌ 网络错误 / network error";
+  }
+});
+
+// --- Batch convert (Pro) ----------------------------------------------------
+function setBatchStatus(text) {
+  const el = $("batchstatus");
+  el.textContent = text;
+  el.classList.remove("hidden");
+}
+
+$("batch").addEventListener("click", async () => {
+  const pro = await getPro();
+  if (!pro) return;
+  $("batch").disabled = true;
+  try {
+    const tabs = await chrome.tabs.query({ currentWindow: true, url: ["http://*/*", "https://*/*"] });
+    let done = 0;
+    const parts = [];
+    for (const tab of tabs) {
+      setBatchStatus(`转换中 / converting ${++done}/${tabs.length} — ${tab.title?.slice(0, 30) || ""}`);
+      try {
+        const resp = await chrome.tabs.sendMessage(tab.id, { type: "extract" });
+        if (resp?.ok && resp.md) parts.push(`# ${resp.title || tab.title || "Untitled"}\n\nSource: ${tab.url}\n\n${resp.md}`);
+      } catch { /* content script not injected - skip */ }
+    }
+    if (!parts.length) { setBatchStatus("没有可转换的标签页 / no convertible tabs found"); return; }
+    const merged = parts.join("\n\n---\n\n");
+    const stamp = new Date().toISOString().slice(0, 10);
+    await chrome.downloads.download({
+      url: "data:text/markdown;charset=utf-8," + encodeURIComponent(merged),
+      filename: `wemd-batch-${stamp}.md`, saveAs: true,
+    });
+    setBatchStatus(`✅ 已合并导出 ${parts.length} 个标签页（约 ${Math.round(merged.length / 4).toLocaleString()} tok）/ exported ${parts.length} tabs`);
+  } finally {
+    $("batch").disabled = false;
+  }
+});
+
+// Pro bar render on load
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", renderProBar);
+} else {
+  renderProBar();
+}
 // CN set: direct connectivity. Global set: requires proxy in CN (marked 🌐).
 // None of the CN tools support ?q= prefill -> always copy + open + toast.
 var AI_TARGETS = {

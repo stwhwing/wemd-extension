@@ -62,6 +62,17 @@ header .ver { color: var(--muted); font-weight: 400; font-size: 11px; }
   color: #fff;
   font-size: 12px;
 }
+.probar { display: flex; align-items: center; gap: 6px; margin: 6px 0 2px; }
+.probadge { background: var(--ok); color: #fff; font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 4px; letter-spacing: .5px; }
+.protext { color: var(--muted); font-size: 11.5px; flex: 1; }
+.probtn { padding: 3px 10px; border: 1px solid var(--ok); border-radius: 5px; background: transparent; color: var(--ok); cursor: pointer; font-size: 11px; font-weight: 700; }
+.probtn:hover { background: rgba(26,127,55,.1); }
+.proform { margin: 6px 0; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--card); }
+.proinput { width: 100%; box-sizing: border-box; margin-bottom: 6px; padding: 6px 8px; border: 1px solid var(--border); border-radius: 5px; font-size: 12px; background: var(--bg); color: var(--fg); }
+.btns-b { padding: 5px 12px; border: none; border-radius: 5px; background: var(--ok); color: #fff; font-size: 12px; font-weight: 700; cursor: pointer; }
+.btns-b.ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+.promsg { margin-top: 4px; font-size: 11.5px; color: var(--fg); }
+.promsg.err { color: #cf222e; }
 button {
   flex: 1 1 auto;
   padding: 6px 10px;
