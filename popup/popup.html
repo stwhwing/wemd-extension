@@ -1,69 +1,78 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
   <header>
-    <h1>WeMD <span class="ver">v<span id="ver"></span></span></h1>
+    <div class="hdr-row">
+      <h1>WeMD <span class="ver">v<span id="ver"></span></span></h1>
+      <div class="lang-switch">
+        <button id="lang-en" class="langbtn active">EN</button>
+        <button id="lang-zh" class="langbtn">中文</button>
+      </div>
+    </div>
     <div id="title" class="title"></div>
     <div id="url" class="url"></div>
+    <div class="hdr-links">
+      <a href="https://github.com/stwhwing/wemd-extension" target="_blank" data-i18n="gh_link">GitHub</a>
+      <span>·</span>
+      <a href="https://wemd.zyx.pink/" target="_blank" data-i18n="site_link">Website</a>
+    </div>
   </header>
 
   <div id="probar" class="probar hidden">
     <span id="probadge" class="probadge hidden">PRO</span>
-    <span id="protext" class="protext">Pro 未激活 — 批量转换等功能需激活</span>
-    <button id="probtn" class="probtn hidden">激活 Pro</button>
+    <span id="protext" class="protext"></span>
+    <button id="probtn" class="probtn hidden" data-i18n="pro_activate">Activate Pro</button>
   </div>
   <div id="proform" class="proform hidden">
-    <input id="prokey" class="proinput" placeholder="License key（WEMD-XXXXX-…）">
-    <input id="proemail" class="proinput" placeholder="购买邮箱 / Purchase email">
-    <div class="btns"><button id="prosubmit" class="btns-b">激活 / Activate</button><button id="procancel" class="btns-b ghost">取消</button></div>
+    <input id="prokey" class="proinput" data-i18n-ph="pro_key_ph" placeholder="License key (WEMD-XXXXX-…)">
+    <input id="proemail" class="proinput" data-i18n-ph="pro_email_ph" placeholder="Purchase email">
+    <div class="btns"><button id="prosubmit" class="btns-b" data-i18n="pro_activate_btn">Activate</button><button id="procancel" class="btns-b ghost" data-i18n="cancel">Cancel</button></div>
     <div id="promsg" class="promsg hidden"></div>
   </div>
 
-  <div id="status" class="status">转换中… / converting…</div>
+  <div id="status" class="status"></div>
+
+  <label class="sel-only"><input type="checkbox" id="sel-only" /> <span data-i18n="selection_only">Convert selection only</span></label>
 
   <div id="stats" class="stats hidden">
     <div class="stat-row">
-      <span>原文 ≈ <b id="raw-tok"></b> tok</span>
+      <span><span data-i18n="raw_label">Original</span> ≈ <b id="raw-tok"></b> tok</span>
       <span>Markdown ≈ <b id="md-tok"></b> tok</span>
     </div>
-    <div class="saved">节省 ≈ <b id="saved-tok"></b> tok（<span id="saved-pct"></span>%）</div>
+    <div class="saved"><span data-i18n="saved_label">Saved</span> ≈ <b id="saved-tok"></b> tok（<span id="saved-pct"></span>%）</div>
     <div class="basis" id="basis"></div>
-    <div class="est">估算口径 chars/4，CJK 偏差较大 / chars-4 heuristic, CJK-biased</div>
+    <div class="est" data-i18n="basis_note">chars/4 heuristic, CJK-biased</div>
   </div>
-
-  <label class="sel-only"><input type="checkbox" id="sel-only" /> 仅转换选中内容 / selection only</label>
 
   <pre id="preview" class="preview hidden"></pre>
 
   <div class="btns">
-    <button id="copy" class="hidden">复制 Markdown / Copy</button>
-    <button id="download" class="hidden">下载 .md / Download</button>
-    <button id="reconvert" class="hidden">重新转换 / Re-convert</button>
-    <button id="batch" class="hidden" title="Pro 功能：转换所有标签页并合并导出">批量转换所有标签页 / Batch (Pro)</button>
+    <button id="copy" class="hidden" data-i18n="copy_btn">Copy Markdown</button>
+    <button id="download" class="hidden" data-i18n="download_btn">Download .md</button>
+    <button id="reconvert" class="hidden" data-i18n="reconvert_btn">Re-convert</button>
+    <button id="batch" class="hidden" data-i18n="batch_btn">Batch convert all tabs (Pro)</button>
   </div>
   <div id="batchstatus" class="promsg hidden"></div>
 
   <div id="airow" class="airow hidden">
-    <span class="ailabel">国内（直连） / CN (direct):</span>
+    <span id="ailabel-cn" class="ailabel"></span>
     <button id="ai-deepseek" class="aibtn">DeepSeek</button>
     <button id="ai-kimi" class="aibtn">Kimi</button>
     <button id="ai-doubao" class="aibtn">豆包</button>
     <button id="ai-yuanbao" class="aibtn">元宝</button>
   </div>
   <div id="airow2" class="airow hidden">
-    <span class="ailabel">国际（需代理） / Global (proxy):</span>
+    <span id="ailabel-gl" class="ailabel"></span>
     <button id="ai-chatgpt" class="aibtn" title="requires proxy in CN">ChatGPT 🌐</button>
     <button id="ai-claude" class="aibtn" title="requires proxy in CN">Claude 🌐</button>
     <button id="ai-gemini" class="aibtn" title="requires proxy in CN">Gemini 🌐</button>
     <button id="ai-perplexity" class="aibtn" title="requires proxy in CN">Perplexity 🌐</button>
   </div>
   <div id="toast" class="toast hidden"></div>
-
-  <footer>🔒 全程本地转换，本扩展不发出任何网络请求 / 100% local, zero network requests</footer>
 
   <script src="popup.js"></script>
 </body>
