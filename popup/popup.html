@@ -11,6 +11,18 @@
     <div id="url" class="url"></div>
   </header>
 
+  <div id="probar" class="probar hidden">
+    <span id="probadge" class="probadge hidden">PRO</span>
+    <span id="protext" class="protext">Pro 未激活 — 批量转换等功能需激活</span>
+    <button id="probtn" class="probtn hidden">激活 Pro</button>
+  </div>
+  <div id="proform" class="proform hidden">
+    <input id="prokey" class="proinput" placeholder="License key（WEMD-XXXXX-…）">
+    <input id="proemail" class="proinput" placeholder="购买邮箱 / Purchase email">
+    <div class="btns"><button id="prosubmit" class="btns-b">激活 / Activate</button><button id="procancel" class="btns-b ghost">取消</button></div>
+    <div id="promsg" class="promsg hidden"></div>
+  </div>
+
   <div id="status" class="status">转换中… / converting…</div>
 
   <div id="stats" class="stats hidden">
@@ -26,18 +38,6 @@
   <label class="sel-only"><input type="checkbox" id="sel-only" /> 仅转换选中内容 / selection only</label>
 
   <pre id="preview" class="preview hidden"></pre>
-
-  <div id="probar" class="probar hidden">
-    <span id="probadge" class="probadge hidden">PRO</span>
-    <span id="protext" class="protext">Pro 未激活 — 批量转换等功能需激活</span>
-    <button id="probtn" class="probtn hidden">激活 Pro</button>
-  </div>
-  <div id="proform" class="proform hidden">
-    <input id="prokey" class="proinput" placeholder="License key（WEMD-XXXXX-…）">
-    <input id="proemail" class="proinput" placeholder="购买邮箱 / Purchase email">
-    <div class="btns"><button id="prosubmit" class="btns-b">激活 / Activate</button><button id="procancel" class="btns-b ghost">取消</button></div>
-    <div id="promsg" class="promsg hidden"></div>
-  </div>
 
   <div class="btns">
     <button id="copy" class="hidden">复制 Markdown / Copy</button>
