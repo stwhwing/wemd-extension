@@ -129,6 +129,14 @@ async function getPro() {
   return s.proLicense || null;
 }
 
+async function getDeviceId() {
+  const s = await chrome.storage.local.get("deviceId");
+  if (s.deviceId) return s.deviceId;
+  const id = (crypto.randomUUID ? crypto.randomUUID() : "dev-" + Date.now() + "-" + Math.random().toString(36).slice(2, 10));
+  await chrome.storage.local.set({ deviceId: id });
+  return id;
+}
+
 async function renderProBar() {
   const pro = await getPro();
   const badge = $("probadge"), text = $("protext"), btn = $("probtn");
@@ -161,7 +169,7 @@ $("prosubmit").addEventListener("click", async function () {
     const r = await fetch(LICENSE_API + "/license/activate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ license_key: $("prokey").value.trim(), email: $("proemail").value.trim() }),
+      body: JSON.stringify({ license_key: $("prokey").value.trim(), email: $("proemail").value.trim(), device_id: await getDeviceId() }),
     });
     const j = await r.json();
     if (j.ok) {
