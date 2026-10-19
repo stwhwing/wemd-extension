@@ -1,9 +1,9 @@
 # WeMD · Page to Markdown (WeChat-ready)
 
 > 网页 / 公众号文章一键转干净 Markdown —— 本地转换零外发，实时显示 token 节省估算。
-> One-click page-to-Markdown — fully local, zero network requests, with quantified token savings.
+> One-click page-to-Markdown — conversion 100% local (page content never leaves your browser), with quantified token savings.
 
-**EN** WeMD converts the page you are on — including WeChat official-account articles — into clean, LLM-ready Markdown entirely inside your browser. It shows **how many tokens the conversion saves** (chars/4 heuristic) before you paste anything into an AI chat. The extension makes **zero network requests**: no account, no telemetry, no cloud — all conversion is local.
+**EN** WeMD converts the page you are on — including WeChat official-account articles — into clean, LLM-ready Markdown entirely inside your browser. It shows **how many tokens the conversion saves** (chars/4 heuristic) before you paste anything into an AI chat. **Page content never leaves your browser**: no account, no telemetry, no cloud — all conversion is local. (The only network call is Pro license activation, which sends just your license key and email — no page content.)
 
 **中文** WeMD 把你正在看的网页（包括微信公众号文章）在浏览器内一键转换为干净、适合大模型输入的 Markdown，并**实时量化"这次转换帮你省了多少 token"**（chars/4 估算口径）。扩展本身**零网络请求**：无账号、无遥测、无云端——全部转换本地完成。
 
@@ -30,7 +30,7 @@
 
 ## Privacy / 隐私
 
-See [PRIVACY.md](PRIVACY.md): zero network requests, zero data collection. The only permissions are `activeTab`/`scripting` (convert the page you act on), `contextMenus`, `clipboardWrite`, `downloads`.
+See [PRIVACY.md](PRIVACY.md): page content never leaves your browser, zero data collection. The only network call is Pro license activation (license key + email only). The only permissions are `activeTab`/`scripting` (convert the page you act on), `contextMenus`, `clipboardWrite`, `downloads`.
 
 ## Roadmap / 路线图
 
