@@ -1,0 +1,17 @@
+WeMD · Page to Markdown (WeChat-ready)
+Copyright (c) 2026 Wing (stwhwing). All Rights Reserved.
+
+本软件（WeMD）及其全部源代码、构建产物与相关素材受著作权保护。未经著作权人书面许可，
+任何人不得复制、修改、分发、再许可、反编译或用于任何商业目的。
+源码公开仅用于安全审计与研究目的；使用本软件即表示同意以上条款。
+
+This software and its source code are copyrighted. No permission is granted to copy,
+modify, distribute, sublicense, or use it for commercial purposes without written
+consent from the copyright holder. Public access to the source is for security audit
+and research only; using this software means you accept these terms.
+
+Third-party components (retain their own licenses, see file headers):
+  - Mozilla Readability — BSD 3-Clause — Copyright (c) 2010 Arc90 Inc
+  - Turndown — MIT License — Copyright (c) 2017 Dom Christie
+
+Contact: wing@zyx.pink
