@@ -11,7 +11,7 @@
 | Browser | Status | Install |
 |---|---|---|
 | Firefox | 🟢 **Live** (v0.4.7 in review) | [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/wemd-page-to-markdown/) |
-| Edge | 🟢 Live (v0.4.5) · v0.4.7 in review | [Edge Add-ons](https://microsoftedge.microsoft.com/addons/search/WeMD) |
+| Edge | 🟢 **Live** (v0.4.7) | [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/wemd-%C2%B7-page-to-markdown-/genfncfahlncmphhoaoomepbdooeiajj) |
 | Chrome | 🟡 v0.4.7 in review | link lands here on approval |
 
 ## Why / 为什么
