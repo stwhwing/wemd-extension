@@ -10,7 +10,7 @@
 body {
   width: 380px;
   margin: 0;
-  padding: 12px;
+  padding: 10px 12px;
   font: 13px/1.5 system-ui, "Segoe UI", "Microsoft YaHei", sans-serif;
   color: var(--fg);
   background: var(--bg);
@@ -18,17 +18,17 @@ body {
 header h1 { margin: 0 0 6px; font-size: 15px; }
 header .ver { color: var(--muted); font-weight: 400; font-size: 11px; }
 .title { font-weight: 600; margin-bottom: 2px; word-break: break-all; }
-.url { color: var(--muted); font-size: 11px; word-break: break-all; margin-bottom: 8px; }
-.status { color: var(--muted); padding: 8px 0; }
+.url { color: var(--muted); font-size: 11px; word-break: break-all; margin-bottom: 6px; }
+.status { color: var(--muted); padding: 4px 0; }
 .status.err { color: var(--err); }
-.stats { border: 1px solid var(--border); border-radius: 6px; padding: 8px; margin-bottom: 8px; }
+.stats { border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px; margin-bottom: 6px; }
 .stat-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
 .saved { color: var(--ok); font-weight: 600; }
 .basis { color: var(--accent); font-size: 11px; margin-top: 4px; word-break: break-all; }
 .est { color: var(--muted); font-size: 10px; margin-top: 2px; }
 .sel-only { display: block; margin: 6px 0; font-size: 12px; color: var(--muted); }
 .preview {
-  max-height: 200px;
+  max-height: 120px;
   overflow: auto;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -37,10 +37,10 @@ header .ver { color: var(--muted); font-weight: 400; font-size: 11px; }
   word-break: break-word;
   font: 11px/1.5 Consolas, monospace;
   background: #f6f8fa;
-  margin: 0 0 8px;
+  margin: 0 0 6px;
 }
 .btns { display: flex; gap: 6px; flex-wrap: wrap; }
-.airow { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin: 8px 0 4px; }
+.airow { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin: 5px 0 3px; }
 .ailabel { color: var(--muted); font-size: 11px; }
 .aibtn {
   flex: 0 0 auto;
@@ -75,7 +75,7 @@ header .ver { color: var(--muted); font-weight: 400; font-size: 11px; }
 .promsg.err { color: #cf222e; }
 button {
   flex: 1 1 auto;
-  padding: 6px 10px;
+  padding: 5px 10px;
   border: 1px solid var(--border);
   border-radius: 6px;
   background: #f6f8fa;

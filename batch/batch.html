@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>WeMD Batch</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font: 14px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; max-width: 720px; margin: 0 auto; padding: 24px; }
+    h1 { font-size: 18px; margin: 0 0 4px; }
+    .sub { color: #888; margin-bottom: 20px; }
+    button { font: inherit; padding: 10px 18px; border-radius: 8px; border: 1px solid #bbb; background: #2b7fff; color: #fff; cursor: pointer; }
+    button.ghost { background: transparent; color: inherit; }
+    button:disabled { opacity: .5; cursor: default; }
+    #gate, #progress, #result, #err { margin-top: 16px; }
+    .row { padding: 6px 0; border-bottom: 1px solid rgba(128,128,128,.2); display: flex; justify-content: space-between; gap: 12px; }
+    .row .t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 70%; }
+    .row .s { color: #2a9d3f; white-space: nowrap; }
+    .row .s.bad { color: #c0392b; }
+    pre { background: rgba(128,128,128,.12); padding: 12px; border-radius: 8px; max-height: 320px; overflow: auto; white-space: pre-wrap; }
+    .optrow { display: block; margin: 10px 0; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <h1 id="h"></h1>
+  <div class="sub" id="sub"></div>
+
+  <div id="gate">
+    <div id="gate-msg"></div>
+    <label id="imgrow" class="optrow hidden"><input type="checkbox" id="withimg" /> <span id="imglabel"></span></label>
+    <button id="start" class="hidden"></button>
+    <button id="grant" class="hidden"></button>
+  </div>
+
+  <div id="progress" class="hidden">
+    <div id="p-line"></div>
+    <div id="p-rows"></div>
+  </div>
+
+  <div id="result" class="hidden"><pre id="preview"></pre></div>
+  <div id="err"></div>
+
+  <script src="../shared/pro.js"></script>
+  <script src="../shared/export-utils.js"></script>
+  <script src="batch.js"></script>
+</body>
+</html>

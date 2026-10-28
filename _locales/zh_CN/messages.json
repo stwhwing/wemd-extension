@@ -1,0 +1,5 @@
+{
+  "appName": { "message": "WeMD · 网页/公众号转 Markdown" },
+  "appShortName": { "message": "WeMD" },
+  "appDesc": { "message": "网页/公众号文章一键转干净 Markdown —— 本地转换零外发，实时显示 token 节省估算。" }
+}

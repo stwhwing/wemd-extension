@@ -19,6 +19,8 @@
       <a href="https://github.com/stwhwing/wemd-extension" target="_blank" data-i18n="gh_link">GitHub</a>
       <span>·</span>
       <a href="https://wemd.zyx.pink/" target="_blank" data-i18n="site_link">Website</a>
+      <span>·</span>
+      <a href="https://github.com/stwhwing/wemd-extension/issues" target="_blank" data-i18n="fb_link">Feedback</a>
     </div>
   </header>
 
@@ -32,6 +34,14 @@
     <input id="proemail" class="proinput" data-i18n-ph="pro_email_ph" placeholder="Purchase email">
     <div class="btns"><button id="prosubmit" class="btns-b" data-i18n="pro_activate_btn">Activate</button><button id="procancel" class="btns-b ghost" data-i18n="cancel">Cancel</button></div>
     <div id="promsg" class="promsg hidden"></div>
+  </div>
+
+  <div id="fmarea" class="proform hidden">
+    <div class="fm-label" data-i18n="fm_label">Front-matter template (Pro)</div>
+    <textarea id="fmtext" class="proinput" rows="5" spellcheck="false" data-i18n-ph="fm_ph" placeholder="---&#10;title: {{title}}&#10;url: {{url}}&#10;---"></textarea>
+    <div class="fm-hint" data-i18n="fm_hint">Vars: {{title}} {{url}} {{site}} {{author}} {{account}} {{date}}</div>
+    <div class="btns"><button id="fmsave" class="btns-b" data-i18n="fm_save">Save</button><button id="fmclear" class="btns-b ghost" data-i18n="fm_clear">Clear</button></div>
+    <div id="fmmsg" class="promsg hidden"></div>
   </div>
 
   <div id="status" class="status"></div>
@@ -56,7 +66,6 @@
     <button id="reconvert" class="hidden" data-i18n="reconvert_btn">Re-convert</button>
     <button id="batch" class="hidden" data-i18n="batch_btn">Batch convert all tabs (Pro)</button>
   </div>
-  <div id="batchstatus" class="promsg hidden"></div>
 
   <div id="airow" class="airow hidden">
     <span id="ailabel-cn" class="ailabel"></span>
@@ -74,6 +83,8 @@
   </div>
   <div id="toast" class="toast hidden"></div>
 
+  <script src="../shared/pro.js"></script>
+  <script src="../shared/export-utils.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>

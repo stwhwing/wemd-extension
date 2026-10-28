@@ -1,9 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "WeMD · Page to Markdown (WeChat-ready)",
-  "short_name": "WeMD",
-  "version": "0.4.5",
-  "description": "网页/公众号文章一键转干净 Markdown —— 本地转换零外发，实时显示 token 节省估算。One-click page-to-Markdown, fully local, with quantified token savings.",
+  "default_locale": "en",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "version": "0.4.7",
+  "description": "__MSG_appDesc__",
   "permissions": [
     "contextMenus",
     "activeTab",
@@ -31,10 +32,7 @@
     }
   },
   "minimum_chrome_version": "102",
-  "host_permissions": [
-    "http://*/*",
-    "https://*/*"
-  ],
+  "optional_host_permissions": ["<all_urls>"],
   "browser_specific_settings": {
     "gecko": {
       "id": "wemd@zyx.pink",

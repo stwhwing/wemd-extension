@@ -42,8 +42,15 @@ footer a{color:var(--accent)}
     <span class="badge">📊 Token savings quantified</span>
     <span class="badge">⚡ MV3 · No account</span>
   </div>
-  <a class="cta" href="https://chromewebstore.google.com/">Install from Chrome Web Store（上架后生效）</a>
+  <a class="cta" href="https://addons.mozilla.org/firefox/addon/wemd-page-to-markdown/">Install on Firefox · 已上架</a>
+  <a class="cta alt" href="https://microsoftedge.microsoft.com/addons/search/WeMD">Install on Edge · 已上架</a>
   <a class="cta alt" href="https://github.com/stwhwing/wemd-extension">Source on GitHub</a>
+  <p class="note">Chrome Web Store 版本审核中，见下方订阅 / The Chrome build is in review — get notified below.</p>
+
+  <h2 id="notify">Chrome 版上线通知 · Get notified</h2>
+  <p>WeMD 的 Chrome 版正在审核。两种方式第一时间知道：Chrome build is in review — two ways to be first:</p>
+  <a class="cta alt" href="https://github.com/stwhwing/wemd-extension">★ Watch Releases on GitHub</a>
+  <a class="cta alt" href="mailto:wing@zyx.pink?subject=Notify%20me%20when%20WeMD%20hits%20Chrome%20Web%20Store">✉ 邮件通知我 · Email me</a>
 
   <h2>Why local beats server-side / 为什么本地转换赢服务端</h2>
   <table>
@@ -54,7 +61,12 @@ footer a{color:var(--accent)}
     <tr><td>Personalized / internal pages 个性化/内页</td><td>❌ generic version</td><td>✅ exactly what you see</td></tr>
     <tr><td>WeChat articles (3MB shell) 微信公众号</td><td>❌ chrome buries the body</td><td>✅ deep extraction, <b>-100% tokens measured</b></td></tr>
   </table>
-  <p class="note"><b>Measured on real pages / 真实页面实测</b>：python.org <b>13,245 → 746 tokens (-95%)</b> · a WeChat article <b>1,117,393 → 905 tokens (-100%)</b>. Token counting (chars/4 heuristic) is shown before you paste — <b>free, always</b>.</p>
+  <p class="note"><b>Measured on real pages / 真实页面实测</b>：python.org <b>13,245 → 746 tokens (-95%)</b> · WeChat articles 微信文章 <b>1,172,581 → 3,766 (-99.7%)</b> and <b>1,117,393 → 905 (-100%)</b>. Token counting (chars/4 heuristic) is shown before you paste — <b>free, always</b>.</p>
+
+  <h2>See it in action · 实拍</h2>
+  <p><img src="screenshots/edge-shot-1-wechat.png" alt="WeChat article converted — 99.7% tokens saved" style="max-width:100%;border:1px solid var(--border);border-radius:10px"></p>
+  <p><img src="screenshots/edge-shot-2-zhihu.png" alt="Zhihu answer converted — 99% tokens saved" style="max-width:100%;border:1px solid var(--border);border-radius:10px"></p>
+  <p><img src="screenshots/edge-shot-3-batch.png" alt="Pro batch conversion — merge all tabs and export" style="max-width:100%;border:1px solid var(--border);border-radius:10px"></p>
 
   <h2>What it does · 它做什么</h2>
   <div class="grid">
@@ -74,8 +86,9 @@ footer a{color:var(--accent)}
     <tr><td>Batch convert all tabs 批量转换所有标签页</td><td>—</td><td>✅</td></tr>
     <tr><td>Custom front-matter templates 自定义模板</td><td>—</td><td>✅</td></tr>
     <tr><td>Image bundle download 图片打包下载</td><td>—</td><td>✅</td></tr>
-    <tr><td>Smart WeChat promo-tail truncation 往期精选智能截断</td><td>—</td><td>✅</td></tr>
-    <tr><td><b>Price</b></td><td><span class="price">$0</span></td><td><span class="price">$29<span style="font-size:14px;font-weight:400">/year</span></span> or $59 lifetime</td></tr>
+    <tr><td>WeChat promo-tail trimming 推广尾清理</td><td>✅</td><td>✅</td></tr>
+    <tr><td>Shadow-DOM aware extraction 网页组件内容提取</td><td>✅</td><td>✅</td></tr>
+    <tr><td><b>Price</b></td><td><span class="price">$0</span></td><td><span class="price">$3.99</span><span style="font-size:14px;font-weight:400">/mo</span> · <span class="price">$29</span><span style="font-size:14px;font-weight:400">/yr</span> · <span class="price">$59</span><span style="font-size:14px;font-weight:400"> lifetime 买断</span></td></tr>
   </table>
   <p class="note">Pro is coming after the free launch period — early users keep lifetime access pricing. Pro 将在免费发布期结束后推出，早期用户锁定买断价。</p>
 
