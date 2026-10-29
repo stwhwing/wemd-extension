@@ -12,7 +12,7 @@
 |---|---|---|
 | Firefox | 🟢 已上架 | [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/wemd-page-to-markdown/) |
 | Edge | 🟢 已上架（v0.4.7） | [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/wemd-%C2%B7-page-to-markdown-/genfncfahlncmphhoaoomepbdooeiajj) |
-| Chrome | 🟡 0.4.7 审核中 | 过审后此处更新链接 |
+| Chrome | 🟢 已上架（v0.4.7） | [Chrome 应用商店](https://chromewebstore.google.com/detail/wemd-%C2%B7-page-to-markdown-w/aiijpaddpkdppaabanaafiffoiidamgi) |
 
 ## 为什么做它 / Why
 
